@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.min.css') }}">
+    <title>{% block title %}License Admin{% endblock %}</title>
+</head>
+<body class="p-4">
+    <div class="container">
+        <nav class="navbar mb-4">
+            <span class="navbar-brand fw-bold">License Admin</span>
+            <a href="/logout" class="btn btn-outline-secondary btn-sm">Log out</a>
+        </nav>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

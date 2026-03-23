@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}User Features — License Admin{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h5 class="mb-0">Managing features for <code>{{ user_id }}</code></h5>
+    <a href="/" class="btn btn-outline-secondary btn-sm">Back to users</a>
+</div>
+
+<div class="row">
+    <!-- Assigned features -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-success text-white">Assigned features</div>
+            <ul class="list-group list-group-flush">
+                {% for feature in assigned %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ feature.name }}</strong>
+                        <small class="text-muted ms-2">{{ feature.description }}</small>
+                    </div>
+                    <form action="/revoke" method="post">
+                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                        <input type="hidden" name="feature" value="{{ feature.name }}">
+                        <button class="btn btn-danger btn-sm">Revoke</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="list-group-item text-muted">No features assigned</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <!-- Unassigned features -->
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">Available features</div>
+            <ul class="list-group list-group-flush">
+                {% for feature in unassigned %}
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                        <strong>{{ feature.name }}</strong>
+                        <small class="text-muted ms-2">{{ feature.description }}</small>
+                    </div>
+                    <form action="/assign" method="post">
+                        <input type="hidden" name="user_id" value="{{ user_id }}">
+                        <input type="hidden" name="feature" value="{{ feature.name }}">
+                        <button class="btn btn-success btn-sm">Assign</button>
+                    </form>
+                </li>
+                {% else %}
+                <li class="list-group-item text-muted">All features assigned</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

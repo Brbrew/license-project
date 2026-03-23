@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}My Account{% endblock %}
+
+{% block content %}
+<h5 class="mb-4">Welcome, {{ username }}</h5>
+<h5 class="mb-4">Your active features</h5>
+<ul class="list-group mb-4">
+    {% for feature in features %}
+    <li class="list-group-item">{{ feature }}</li>
+    {% else %}
+    <li class="list-group-item text-muted">No features assigned</li>
+    {% endfor %}
+</ul>
+<hr>
+<h5 class="mb-3">Feature access</h5>
+<ul class="list-group">
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Advanced dashboard
+        {% if 'dashboard' in features %}
+        <a href="/dashboard" class="btn btn-success btn-sm">Open</a>
+        {% else %}
+        <span class="badge bg-secondary">Not licensed</span>
+        {% endif %}
+    </li>
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+        Export tools
+        {% if 'export' in features %}
+        <a href="/export" class="btn btn-success btn-sm">Open</a>
+        {% else %}
+        <span class="badge bg-secondary">Not licensed</span>
+        {% endif %}
+    </li>
+</ul>
+{% endblock %}

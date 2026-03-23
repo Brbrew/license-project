@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Users — License Admin{% endblock %}
+
+{% block content %}
+<h5 class="mb-3">Select a user</h5>
+<ul class="list-group">
+    {% for user in users %}
+    <a href="/user/{{ user.id }}" class="list-group-item list-group-item-action">
+        {{ user.username }}
+        <small class="text-muted ms-2">{{ user.id }}</small>
+    </a>
+    {% endfor %}
+</ul>
+{% endblock %}
